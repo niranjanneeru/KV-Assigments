@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee Details</title>
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <aside>
+        <header>
+            <img id="logo" src="assets/kv logo.png" alt="Logo">
+        </header>
+        <nav>
+            <div class="icon-label">
+                <div class="icon">
+                    <img src="assets/icon.svg" alt="employee logo">
+                </div>
+                <p id="label-title">Employee List</p>
+            </div>
+        </nav>
+    </aside>
+    <!-- <div class="white-header"></div> -->
+    <main>
+        <div class="shadow-box"><h2>Create Employee</h2></div>
+        <div class="shadow-box">
+            <form action="/" method="post">
+                <div class="wrapper-div">
+                <span>
+                <label for="e_name">Employee Name</label>
+                <input class="text-box" id="e_name" type="text" placeholder="Employee Name">
+                </span>
+
+                <span>
+                    <label for="e_id">Employee ID</label>
+                    <input class="text-box" id="e_id" type="text" placeholder="Employee ID">
+                </span>
+
+                <span>
+                    <label for="joining_date">Joining Date</label>
+                    <input class="text-box" id="joining_date" type="text" onblur="(this.type='text')" onfocus="(this.type='date')" placeholder="Joining Date">
+                </span>
+
+                <span>
+                    <label for="role">Role</label>
+                    <select class="text-box" id="role">
+                        <option class="dim" value="" selected disabled hidden>Choose Role</option>
+                        <option value="intern">Intern</option>
+                        <option value="sde">SDE</option>
+                    </select>
+                    <img src="assets/arrow.svg" class="arrow" alt="arrow_icon">
+                </span>
+
+                <span>
+                    <label for="status">Status</label>
+                    <select class="text-box" id="status">
+                        <option class="dim" value="" selected disabled hidden>Status</option>
+                        <option value="active">Active</option>
+                        <option value="away">Away</option>
+                    </select>
+                    <img src="assets/arrow.svg" class="arrow" alt="arrow_icon">
+                </span>
+
+                <span>
+                    <label for="experience">Experience</label>
+                    <input class="text-box" id="experience" type="text" placeholder="Experience">
+                </span>
+
+                <span>
+                    <label for="address">Address</label>
+                    <input class="text-box" id="address" type="text" placeholder="Address">
+                </span>
+            </div>
+
+            <button type="submit" class="create-button">Create</button>
+            <button type="submit" class="cancel-button">Cancel</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
