@@ -2,14 +2,57 @@
 <html lang="en">
 <head>
 <title>Promise</title>
+<style>
+    *{
+        margin: 0;
+        padding: 0;
+    }
+    div{
+        display: flex;
+        padding: 10px;
+        flex-direction: column;
+    }
+
+    li{
+        padding: 5px;
+        font-family: sans-serif;
+    }
+
+    body{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        flex-direction: column;
+    }
+
+    button{
+        padding: 10px 50px;
+        text-align: center;
+        display: inline-block;
+        border: none;
+        width: 25%;
+        border-radius: 5px;
+        margin-right: 15px;
+        border-style: solid;
+        border-width: 1px;
+        background-color: #03aeee;
+        color: white;
+        border-color: #03aeee;
+        border-top: 50px;
+        /* border-top: 100px; */
+    }
+</style>
 </head>
 <body>
-<button id="fetch_data">Fetch data</button>
+<button id="fetch_data">Fetch Houses</button>
 <div id="house_list"></div>
 <div id="grp_house_list"></div>
 </body>
 <script>
     const url = "https://www.anapioficeandfire.com/api/houses";
+    let state = 0;
+    let pub_data;
 
 
     function update_html(id, str){
@@ -17,46 +60,56 @@
     }
 
     function fetch_data (){
-        fetch(url).then((response) => {
-            response.json().then((data) => {
-            let list_li = [];
-            data.forEach(element => {
-                list_li.push({
-                    url: element.url,
-                    name:element.name,
-                    region:element.region
-                })
-            });
+        if(state === 0){
+            fetch(url).then((response) => {
+                response.json().then((data) => {
+                let list_li = [];
+                data.forEach(element => {
+                    list_li.push({
+                        url: element.url,
+                        name:element.name,
+                        region:element.region
+                    })
+                });
 
-            let str = "";
-            list_li.forEach(element => {
-                str += `<li> ${element.name} - ${element.region}</li>`;
+                let str = "";
+                list_li.forEach(element => {
+                    str += `<li> ${element.name} - ${element.region}</li>`;
+                })
+                update_html("house_list", str);
+                
+                pub_data = list_li;
+                state = 1;
+                document.getElementById("fetch_data").innerHTML = "Group Regions"
+                })
             })
-            update_html("house_list", str);
-            
+        }else{
             let new_data = {};
 
-            list_li.forEach(element => {
-                if (!new_data[element.region]){
-                    new_data[element.region] = [];
+            list_li = pub_data;
+
+                list_li.forEach(element => {
+                    if (!new_data[element.region]){
+                        new_data[element.region] = [];
+                    }
+                    new_data[element.region].push(element);
+                });
+
+                console.log(new_data);
+
+                str = "";
+
+                for (const key in new_data){
+                    str += `<h3> ${key} </h3>`;
+                    new_data[key].forEach(element => {
+                        str += `<li> ${element.name}</li>`;
+                    })
                 }
-                new_data[element.region].push(element);
-            });
-
-            console.log(new_data);
-
-            str = "";
-
-            for (const key in new_data){
-                str += `<h3> ${key} </h3>`;
-                new_data[key].forEach(element => {
-                    str += `<li> ${element.name}</li>`;
-                })
-            }
-            
-            update_html("grp_house_list", str);
-            })
-        })
+                
+                update_html("house_list", str);
+                state = 0;
+                document.getElementById("fetch_data").innerHTML = "Fetch Houses"
+        }
     }
 
     document.getElementById("fetch_data").addEventListener("click", fetch_data);
