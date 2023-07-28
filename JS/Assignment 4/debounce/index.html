@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debounce</title>
+</head>
+<body>
+    <input id="text_box" type="text">
+</body>
+<script>
+
+    let count = 1;
+
+    function debounce(trigger, timeout){
+        let curr = 0;
+        let function_call;
+
+        return () => {
+            if(curr === 0){
+                function_call = setTimeout(trigger, timeout);
+                curr = Date.now();
+                return;
+            }
+            if(Date.now() - curr < timeout){
+                clearTimeout(function_call);
+                function_call = setTimeout(trigger, timeout);
+            }
+            curr = Date.now();
+        }
+    }
+    function trigger(){
+        console.log(count, document.getElementById("text_box").value);
+        count++;
+    }
+    t = debounce(trigger, 1000)
+    document.getElementById("text_box").addEventListener("input", t);
+</script>
+</html>

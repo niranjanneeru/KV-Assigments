@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <input id="text_box" type="text">
+</body>
+<script>
+
+    function throttle(trigger, timeout){
+        let prev = 0;
+        let state = 1;
+
+        return () => {
+            if(state === 1){
+                state = 0;
+                trigger();
+                setTimeout(()=>{
+                    state = 1
+                    if(prev){
+                        prev = 0;
+                        throttle(trigger, timeout)();
+                    }
+                }, timeout);
+            }else{
+                prev = 1;
+            }
+        }
+    }
+
+    function trigger(){
+        console.log("Hello");
+    }
+
+    t = throttle(trigger, 5000)
+
+    document.getElementById("text_box").addEventListener("input", t);
+
+</script>
+</html>
