@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Promise</title>
+</head>
+<body>
+<button id="fetch_data">Fetch data</button>
+<div id="house_list"></div>
+<div id="grp_house_list"></div>
+</body>
+<script>
+    const url = "https://www.anapioficeandfire.com/api/houses";
+
+
+    function update_html(id, str){
+        document.getElementById(id).innerHTML = str;
+    }
+
+    function fetch_data (){
+        fetch(url).then((response) => {
+            response.json().then((data) => {
+            let list_li = [];
+            data.forEach(element => {
+                list_li.push({
+                    url: element.url,
+                    name:element.name,
+                    region:element.region
+                })
+            });
+
+            let str = "";
+            list_li.forEach(element => {
+                str += `<li> ${element.name} - ${element.region}</li>`;
+            })
+            update_html("house_list", str);
+            
+            let new_data = {};
+
+            list_li.forEach(element => {
+                if (!new_data[element.region]){
+                    new_data[element.region] = [];
+                }
+                new_data[element.region].push(element);
+            });
+
+            console.log(new_data);
+
+            str = "";
+
+            for (const key in new_data){
+                str += `<h3> ${key} </h3>`;
+                new_data[key].forEach(element => {
+                    str += `<li> ${element.name}</li>`;
+                })
+            }
+            
+            update_html("grp_house_list", str);
+            })
+        })
+    }
+
+    document.getElementById("fetch_data").addEventListener("click", fetch_data);
+</script>
+</html>
