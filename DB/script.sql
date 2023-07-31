@@ -55,20 +55,20 @@ create table product_order(
 	constraint "FK_3c2bc72f03fd5abbbc5ac169001" foreign key("order_id") references "order"("id")
 );
 
-INSERT INTO public.user
+INSERT INTO user
 (id, "name", phone_number, email, "password")
 VALUES(uuid_generate_v4(), 'Virat Kohli', '+918087878787', 'vr@krp.com', 'blahblahblah'),
 (uuid_generate_v4(), 'Sachin T', '+918087123787', 'st@p.com', 'blahblahblahblah'),
 (uuid_generate_v4(), 'MS Dhoni', '+918012345787', 'msd@s.com', 'blahblahblahblahblah');
 
 
-INSERT INTO public.address
+INSERT INTO address
 (address, user_id)
 VALUES('My New Address', (select id from user where name='Virat Kohli')),
 ('Who Cares', (select id from user where name='Sachin T')),
 ('Ha Ha Ha', (select id from user where name='MS Dhoni'));
 
-INSERT INTO public.product
+INSERT INTO product
 ("name", description, price, sku, id)
 VALUES('Mouse', 'Useful Mouse', 20, 'ASDFGH', uuid_generate_v4()),
 ('Keyboard', 'Amazing Keyboard', 120, 'ZXCVBH', uuid_generate_v4()),
@@ -76,11 +76,11 @@ VALUES('Mouse', 'Useful Mouse', 20, 'ASDFGH', uuid_generate_v4()),
 ('Bottle', 'Premium', 270, 'ASDFGP', uuid_generate_v4()),
 ('T-Shirt', 'Nice T', 70, 'MNHGTY', uuid_generate_v4());
 
-INSERT INTO public.category
+INSERT INTO category
 ("name")
 VALUES('Logistics'), ('Electronics');
 
-INSERT INTO public.product_category
+INSERT INTO product_category
 (product_id, category_id)
 VALUES((select id from product  where name='Mouse'), (select id from category  where name='Electronics')),
 ((select id from product  where name='Mouse'), (select id from category  where name='Logistics')),
@@ -88,7 +88,7 @@ VALUES((select id from product  where name='Mouse'), (select id from category  w
 ((select id from product  where name='Laptop'), (select id from category  where name='Electronics')),
 ((select id from product  where name='Bottle'), (select id from category  where name='Logistics'));
 
-INSERT INTO public."order"
+INSERT INTO "order"
 (id, order_address, price, user_id)
 VALUES(uuid_generate_v4(), 1, 330, (select id from user where name='Virat Kohli')),
 (uuid_generate_v4(), 2, 40, (select id from user where name='Sachin T')),
@@ -96,7 +96,7 @@ VALUES(uuid_generate_v4(), 1, 330, (select id from user where name='Virat Kohli'
 (uuid_generate_v4(), 3, 220, (select id from user where name='MS Dhoni')),
 (uuid_generate_v4(), 3, 310, (select id from user where name='MS Dhoni'));
 
-INSERT INTO public.product_order
+INSERT INTO product_order
 (product_id, order_id, count, price)
 VALUES((select id from product  where name='Mouse'), 'b3fc4f5a-b4b0-4c68-a1ec-a9862d30236b', 2, (select price from product  where name='Mouse')),
 ((select id from product  where name='Keyboard'), 'b3fc4f5a-b4b0-4c68-a1ec-a9862d30236b', 3, (select price from product  where name='Keyboard')),
