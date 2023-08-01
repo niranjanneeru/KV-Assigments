@@ -55,9 +55,9 @@
     let pub_data;
 
 
-    function update_html(id, str){
-        document.getElementById(id).innerHTML = str;
-    }
+    const update_html = (id) => (html) => {
+        document.getElementById(id).innerHTML = html;
+    } 
 
     function fetch_data (){
         if(state === 0){
@@ -76,7 +76,7 @@
                 list_li.forEach(element => {
                     str += `<li> ${element.name} - ${element.region}</li>`;
                 })
-                update_html("house_list", str);
+                update_html("house_list")(str);
                 
                 pub_data = list_li;
                 state = 1;
@@ -106,7 +106,7 @@
                     })
                 }
                 
-                update_html("house_list", str);
+                update_html("house_list")(str);
                 state = 0;
                 document.getElementById("fetch_data").innerHTML = "Fetch Houses"
         }
