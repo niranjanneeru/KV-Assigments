@@ -1,3 +1,7 @@
 [submodule "backend"]
 	path = backend
 	url = https://github.com/niranjanneeru/kv-tr-backend.git
+[submodule "kv-tr-backend"]
+	path = kv-tr-backend
+	url = https://github.com/niranjanneeru/kv-tr-backend/
+	branch = main
