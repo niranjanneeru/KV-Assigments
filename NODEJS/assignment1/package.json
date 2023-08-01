@@ -1,0 +1,17 @@
+{
+  "name": "assignment1",
+  "version": "1.0.0",
+  "description": "Assignment 1",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm run start-server",
+    "start-server": "npm run build && npm dist/app.js",
+    "build": "rm -rf dist && npx tsc"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "typescript": "^5.1.6"
+  }
+}
