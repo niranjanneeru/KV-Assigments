@@ -1,0 +1,31 @@
+.counter {
+    background-color: #E1E1E1;
+    width: fit-content;
+    text-align: center;
+    padding: 32px;
+    margin: 32px;
+  }
+  
+  .title {
+    font-size: 22px;
+    margin-bottom: 20px;
+  }
+  
+  .number {
+    font-size: 38px;
+    font-weight: bold;
+    background-color: #fff;
+    width: fit-content;
+    margin: auto;
+    padding: 20px;
+    margin-bottom: 20px;
+    width: 88px;
+  }
+  
+  .button {
+    margin: 10px;
+    padding: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    border: 1px solid grey;
+  }
